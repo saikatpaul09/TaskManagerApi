@@ -1,6 +1,6 @@
 # TaskManagerApi
-In this project, we will create a RESTful API using Node.js, Express.js, and NPM packages. The API will allow users to perform CRUD operations (Create, Read, Update, and Delete) on tasks. It's a practice project to understand the fundamentals of how REST APIs work
-Features includes :-
+In this project, we will create a RESTful API using Node.js, Express.js, and NPM packages. The API will allow users to perform CRUD operations (Create, Read, Update, and Delete) on tasks. It's a practice project to understand the fundamentals of how REST APIs work. 
+We are going to perform the below listed operations :-
 1. GET /tasks: Retrieve all tasks.
 2. GET /tasks/:id: Retrieve a single task by its ID.
 3. POST /tasks: Create a new task.
