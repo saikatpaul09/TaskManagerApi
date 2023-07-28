@@ -6,7 +6,8 @@ We are going to perform the below listed operations :-
 3. POST /tasks: Create a new task.
 4. PUT /tasks/:id: Update an existing task by its ID.
 5. DELETE /tasks/:id: Delete a task by its ID.
-
+6. Implement filtering and sorting for the GET /tasks endpoint
+   
 Node version - v18.12.0
 Express Js version - 4.18.2
 
