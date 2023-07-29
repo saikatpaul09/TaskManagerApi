@@ -103,4 +103,16 @@ taskRoutes.delete("/:id", (req, res) => {
       .json({ message: "id to be deletd not found! sorry" });
 });
 
+taskRoutes.get("/priority/:type", (req, res) => {
+  const type = req.params.type;
+  let taskdataCopy = taskData;
+  const result = taskdataCopy.taskList.filter((obj) => obj.priority == type);
+  if (result && result.length != 0) {
+    return res
+      .status(200)
+      .json({ result: result, message: "Fetch results based on priority" });
+  } else {
+    return res.status(400).json({ message: "No results found" });
+  }
+});
 module.exports = taskRoutes;
