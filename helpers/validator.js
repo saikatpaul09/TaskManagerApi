@@ -53,7 +53,9 @@ class validator {
   }
 
   static isTaskFound(taskInfo, taskData) {
-    let taskFound = taskData.taskList.some((ele) => ele.id == taskInfo.id);
+    let taskFound = false;
+    let compareVal = taskInfo.id ? taskInfo.id : taskInfo;
+    taskFound = taskData.taskList.some((ele) => ele.id == compareVal);
     if (taskFound) return true;
     return false;
   }

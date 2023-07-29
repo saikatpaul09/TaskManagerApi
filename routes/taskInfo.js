@@ -69,4 +69,29 @@ taskRoutes.put("/EDIT_TASK/:id", (req, res) => {
   }
 });
 
+taskRoutes.delete("/DELETE_TASK/:id", (req, res) => {
+  let taskId = req?.params?.id;
+  let taskdataModified = taskData;
+  if (validator.isTaskFound(taskId, taskData)) {
+    let result = taskData?.taskList.find((val) => val.id === taskId);
+    let index = taskdataModified.taskList.indexOf(result);
+    taskdataModified.taskList.splice(index, 1);
+    let writePath = path.join(__dirname, "..", "tasks.json");
+    try {
+      fs.writeFileSync(writePath, JSON.stringify(taskdataModified), {
+        encoding: "utf-8",
+        flag: "w",
+      });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Task not deleted! try again later" });
+    }
+    return res.status(200).json({ message: "Task deleted succesfully" });
+  } else
+    return res
+      .status(400)
+      .json({ message: "id to be deletd not found! sorry" });
+});
+
 module.exports = taskRoutes;
