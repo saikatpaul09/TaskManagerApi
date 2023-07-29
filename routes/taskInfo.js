@@ -21,7 +21,7 @@ taskRoutes.get("/:id", (req, res) => {
   return res.status(200).json(result);
 });
 
-taskRoutes.post("/ADD_NEW_TASK", (req, res) => {
+taskRoutes.post("/", (req, res) => {
   const taskDetails = req.body;
   if (validator.validateTaskInfo(req.body, taskData).status) {
     let writePath = path.join(__dirname, "..", "tasks.json");
@@ -43,7 +43,7 @@ taskRoutes.post("/ADD_NEW_TASK", (req, res) => {
   }
 });
 
-taskRoutes.put("/EDIT_TASK/:id", (req, res) => {
+taskRoutes.put("/:id", (req, res) => {
   let taskId = req?.params?.id;
   let taskdataModified = taskData;
   if (validator.validateEditTaskInfo(req.body, taskData).status) {
@@ -69,7 +69,7 @@ taskRoutes.put("/EDIT_TASK/:id", (req, res) => {
   }
 });
 
-taskRoutes.delete("/DELETE_TASK/:id", (req, res) => {
+taskRoutes.delete("/:id", (req, res) => {
   let taskId = req?.params?.id;
   let taskdataModified = taskData;
   if (validator.isTaskFound(taskId, taskData)) {

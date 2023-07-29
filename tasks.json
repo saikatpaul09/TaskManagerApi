@@ -1,13 +1,1 @@
-{
-  "taskList": [
-    {
-      "id": "2",
-      "assignedBy": "ADMIN",
-      "title": "Installing Required Packages",
-      "description": "Once you are done with chosing the tech stack install the required dependancies and dry run the app testing the functionalities of the packages you installed",
-      "date": "21/7/2023",
-      "status": "IN_PROGRESS",
-      "priority": "medium"
-    }
-  ]
-}
+{"taskList":[{"id":"2","assignedBy":"ADMIN","title":"Installing Required Packages","description":"Once you are done with chosing the tech stack install the required dependancies and dry run the app testing the functionalities of the packages you installed","date":"21/7/2023","status":"IN_PROGRESS","priority":"medium"}]}
