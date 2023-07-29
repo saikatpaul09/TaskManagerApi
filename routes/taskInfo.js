@@ -43,4 +43,30 @@ taskRoutes.post("/ADD_NEW_TASK", (req, res) => {
   }
 });
 
+taskRoutes.put("/EDIT_TASK/:id", (req, res) => {
+  let taskId = req?.params?.id;
+  let taskdataModified = taskData;
+  if (validator.validateEditTaskInfo(req.body, taskData).status) {
+    let result = taskData?.taskList.find((val) => val.id === taskId);
+    let index = taskdataModified.taskList.indexOf(result);
+    taskdataModified.taskList[index] = req.body;
+    let writePath = path.join(__dirname, "..", "tasks.json");
+    try {
+      fs.writeFileSync(writePath, JSON.stringify(taskdataModified), {
+        encoding: "utf-8",
+        flag: "w",
+      });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Task not edited! try again later" });
+    }
+    return res.status(200).json({ message: "Task edited succesfully" });
+  } else {
+    return res
+      .status(400)
+      .json(validator.validateEditTaskInfo(req.body, taskData));
+  }
+});
+
 module.exports = taskRoutes;
