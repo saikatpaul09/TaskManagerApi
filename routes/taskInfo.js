@@ -6,6 +6,8 @@ const path = require("path");
 const validator = require("../helpers/validator");
 taskRoutes.use(bodyParser.json());
 
+
+let writePath = path.join(__dirname, "..", "tasks.json");
 taskRoutes.get("/", (req, res) => {
   return res.status(200).json(taskData);
 });
@@ -24,7 +26,6 @@ taskRoutes.get("/:id", (req, res) => {
 taskRoutes.post("/", (req, res) => {
   const taskDetails = req.body;
   if (validator.validateTaskInfo(req.body, taskData).status) {
-    let writePath = path.join(__dirname, "..", "tasks.json");
     let taskdataModified = taskData;
     taskdataModified.taskList.push(taskDetails);
     try {
@@ -50,7 +51,6 @@ taskRoutes.put("/:id", (req, res) => {
     let result = taskData?.taskList.find((val) => val.id === taskId);
     let index = taskdataModified.taskList.indexOf(result);
     taskdataModified.taskList[index] = req.body;
-    let writePath = path.join(__dirname, "..", "tasks.json");
     try {
       fs.writeFileSync(writePath, JSON.stringify(taskdataModified), {
         encoding: "utf-8",
@@ -76,7 +76,6 @@ taskRoutes.delete("/:id", (req, res) => {
     let result = taskData?.taskList.find((val) => val.id === taskId);
     let index = taskdataModified.taskList.indexOf(result);
     taskdataModified.taskList.splice(index, 1);
-    let writePath = path.join(__dirname, "..", "tasks.json");
     try {
       fs.writeFileSync(writePath, JSON.stringify(taskdataModified), {
         encoding: "utf-8",
