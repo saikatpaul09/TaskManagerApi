@@ -18,10 +18,15 @@ class validator {
     };
   }
 
-  static validateEditTaskInfo(taskInfo, taskData) {
-    if (this.isvalidObject(taskInfo) && this.isTaskFound(taskInfo, taskData)) {
+  static validateEditTaskInfo(taskInfo, taskId, taskData) {
+    if (
+      this.isvalidObject(taskInfo) &&
+      this.isTaskFound(taskId, taskData).status
+    ) {
       return {
         status: true,
+        index: this.isTaskFound(taskId, taskData).index,
+        message: "task edited succesfully",
       };
     }
     return {
@@ -48,14 +53,17 @@ class validator {
   }
 
   static validateUniqueTask(taskInfo, taskData) {
-    if (this.isTaskFound(taskInfo, taskData)) return false;
+    if (this.isTaskFound(taskInfo, taskData).status) return false;
     return true;
   }
 
   static isTaskFound(taskInfo, taskData) {
     let compareVal = taskInfo.id ? taskInfo.id : taskInfo;
-    let taskIndex = taskData.taskList.findIndex((ele) => ele.id == compareVal);
-    if (taskIndex != -1)
+    let taskIndex = taskData?.taskList?.findIndex(
+      (ele) => ele.id == compareVal
+    );
+    console.log(taskIndex);
+    if (taskIndex >= 0)
       return {
         status: true,
         index: taskIndex,
