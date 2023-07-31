@@ -11,12 +11,10 @@ let writePath = path.join(__dirname, "..", "tasks.json");
 taskRoutes.get("/", (req, res) => {
   let status = req.query.status;
   let isSort = req.query.sort;
-  console.log(req.query);
   let filteredResult = status
     ? taskData.taskList.filter((obj) => obj.status === status)
     : taskData.taskList;
   if (isSort) {
-    console.log("inside");
     filteredResult.sort((a, b) => new Date(a.date) - new Date(b.date));
   }
   return res.status(200).json(filteredResult);
