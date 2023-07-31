@@ -80,10 +80,11 @@ taskRoutes.put("/:id", (req, res) => {
 taskRoutes.delete("/:id", (req, res) => {
   let taskId = req?.params?.id;
   let taskdataModified = taskData;
-  if (validator.isTaskFound(taskId, taskData)) {
-    let result = taskData?.taskList.find((val) => val.id === taskId);
-    let index = taskdataModified.taskList.indexOf(result);
-    taskdataModified.taskList.splice(index, 1);
+  if (validator.isTaskFound(taskId, taskData).status) {
+    taskdataModified.taskList.splice(
+      validator.isTaskFound(taskId, taskData).index,
+      1
+    );
     try {
       fs.writeFileSync(writePath, JSON.stringify(taskdataModified), {
         encoding: "utf-8",

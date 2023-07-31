@@ -53,10 +53,13 @@ class validator {
   }
 
   static isTaskFound(taskInfo, taskData) {
-    let taskFound = false;
     let compareVal = taskInfo.id ? taskInfo.id : taskInfo;
-    taskFound = taskData.taskList.some((ele) => ele.id == compareVal);
-    if (taskFound) return true;
+    let taskIndex = taskData.taskList.findIndex((ele) => ele.id == compareVal);
+    if (taskIndex != -1)
+      return {
+        status: true,
+        index: taskIndex,
+      };
     return false;
   }
 }
