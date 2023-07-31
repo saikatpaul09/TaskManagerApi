@@ -14,7 +14,7 @@ taskRoutes.get("/", (req, res) => {
   let filteredResult = status
     ? taskData.taskList.filter((obj) => obj.status === status)
     : taskData.taskList;
-  if (isSort) {
+  if (filteredResult.length >= 1 && isSort) {
     filteredResult.sort((a, b) => new Date(a.date) - new Date(b.date));
   }
   return res.status(200).json(filteredResult);
